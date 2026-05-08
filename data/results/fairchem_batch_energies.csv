@@ -1,2 +1,6 @@
 material_id,nominal_formula,adsorbate,adsorbate_structure_file,predicted_energy_eV,backend,status
 MAT_001,RuO2,O,data\substituted_adsorbates\MAT_001_O_adsorbed.cif,-351.77190947301403,uma-s-1p2,success
+MAT_001,RuO2,O2,data\substituted_adsorbates\MAT_001_O2_adsorbed.cif,-356.0026425051326,uma-s-1p2,success
+MAT_001,RuO2,N2O,data\substituted_adsorbates\MAT_001_N2O_adsorbed.cif,-367.7158252288859,uma-s-1p2,success
+MAT_002,Ru0.75Co0.25Ox,O,data\substituted_adsorbates\MAT_002_O_adsorbed.cif,-657.0339226973166,uma-s-1p2,success
+MAT_002,Ru0.75Co0.25Ox,O2,data\substituted_adsorbates\MAT_002_O2_adsorbed.cif,-662.3550995590427,uma-s-1p2,success
