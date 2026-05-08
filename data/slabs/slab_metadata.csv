@@ -1,0 +1,2 @@
+material,structure_type,miller_index,file_path,num_sites
+RuO2,rutile,"(1,1,0)",data\slabs\RuO2_110_slab.cif,24
