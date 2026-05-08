@@ -1,0 +1,4 @@
+material_id,nominal_formula,adsorbate,adsorbate_structure_file,predicted_energy_eV,backend
+MAT_001,RuO2,O,data\substituted_adsorbates\MAT_001_O_adsorbed.cif,-108.0,placeholder_batch
+MAT_001,RuO2,O2,data\substituted_adsorbates\MAT_001_O2_adsorbed.cif,-112.0,placeholder_batch
+MAT_001,RuO2,N2O,data\substituted_adsorbates\MAT_001_N2O_adsorbed.cif,-120.0,placeholder_batch
