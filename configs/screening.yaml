@@ -1,0 +1,31 @@
+screening:
+  descriptors:
+    - O_adsorption_energy
+    - oxygen_vacancy_formation_energy
+    - O2_adsorption_energy
+
+  priority:
+    - moderate_O_binding
+    - low_O2_poisoning
+    - facile_oxygen_release
+
+  surfaces:
+    - representative_low_index_surfaces
+
+  adsorbates:
+    - O
+    - O2
+
+  workflow:
+    - slab_generation
+    - adsorbate_placement
+    - structure_relaxation
+    - descriptor_extraction
+    - ranking
+
+  output:
+    - csv
+    - plots
+
+  objective:
+    - identify Ru-M oxide compositions suitable for oxygen-rich N2O decomposition

@@ -1,0 +1,26 @@
+materials:
+  M_elements:
+    - Co
+    - Fe
+    - Mn
+    - Ce
+    - Ni
+    - Cu
+    - Ti
+    - Zr
+    - V
+    - Si
+
+  Ru_ratios:
+    - 1.0
+    - 0.75
+    - 0.5
+    - 0.25
+    - 0.0
+
+  target_system:
+    - Ru-M mixed oxides
+
+  notes:
+    - Si systems represent silica/zeolite-like environments
+    - Oxygen-rich N2O decomposition conditions assumed
