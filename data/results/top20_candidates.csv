@@ -1,0 +1,21 @@
+material_id,nominal_formula,M_element,Ru_fraction,M_fraction,N2O_adsorption_energy,O_adsorption_energy,O2_adsorption_energy,average_adsorption_energy,ranking_score,ranking_position,notes
+MAT_001,RuO2,Co,1.0,0.0,-3.0,-3.0,-3.0,-3.0,3.1,1,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_002,Ru0.75Co0.25Ox,Co,0.75,0.25,-3.0,-3.0,-3.0,-3.0,3.1,2,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_003,Ru0.50Co0.50Ox,Co,0.5,0.5,-3.0,-3.0,-3.0,-3.0,3.1,3,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_004,Ru0.25Co0.75Ox,Co,0.25,0.75,-3.0,-3.0,-3.0,-3.0,3.1,4,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_006,Ru0.75Fe0.25Ox,Fe,0.75,0.25,-3.0,-3.0,-3.0,-3.0,3.1,5,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_007,Ru0.50Fe0.50Ox,Fe,0.5,0.5,-3.0,-3.0,-3.0,-3.0,3.1,6,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_008,Ru0.25Fe0.75Ox,Fe,0.25,0.75,-3.0,-3.0,-3.0,-3.0,3.1,7,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_010,Ru0.75Mn0.25Ox,Mn,0.75,0.25,-3.0,-3.0,-3.0,-3.0,3.1,8,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_011,Ru0.50Mn0.50Ox,Mn,0.5,0.5,-3.0,-3.0,-3.0,-3.0,3.1,9,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_012,Ru0.25Mn0.75Ox,Mn,0.25,0.75,-3.0,-3.0,-3.0,-3.0,3.1,10,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_014,Ru0.75Ce0.25Ox,Ce,0.75,0.25,-3.0,-3.0,-3.0,-3.0,3.1,11,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_015,Ru0.50Ce0.50Ox,Ce,0.5,0.5,-3.0,-3.0,-3.0,-3.0,3.1,12,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_016,Ru0.25Ce0.75Ox,Ce,0.25,0.75,-3.0,-3.0,-3.0,-3.0,3.1,13,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_018,Ru0.75Ni0.25Ox,Ni,0.75,0.25,-3.0,-3.0,-3.0,-3.0,3.1,14,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_019,Ru0.50Ni0.50Ox,Ni,0.5,0.5,-3.0,-3.0,-3.0,-3.0,3.1,15,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_020,Ru0.25Ni0.75Ox,Ni,0.25,0.75,-3.0,-3.0,-3.0,-3.0,3.1,16,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_022,Ru0.75Cu0.25Ox,Cu,0.75,0.25,-3.0,-3.0,-3.0,-3.0,3.1,17,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_023,Ru0.50Cu0.50Ox,Cu,0.5,0.5,-3.0,-3.0,-3.0,-3.0,3.1,18,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_024,Ru0.25Cu0.75Ox,Cu,0.25,0.75,-3.0,-3.0,-3.0,-3.0,3.1,19,placeholder ranking; replace with fairchem/CatMAP descriptors
+MAT_026,Ru0.75Ti0.25Ox,Ti,0.75,0.25,-3.0,-3.0,-3.0,-3.0,3.1,20,placeholder ranking; replace with fairchem/CatMAP descriptors
