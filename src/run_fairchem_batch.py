@@ -2,22 +2,56 @@ from pathlib import Path
 import argparse
 import pandas as pd
 
+from pymatgen.core import Structure
+from pymatgen.io.ase import AseAtomsAdaptor
 
-def placeholder_predict_energy(
-    adsorbate: str,
-):
-    """Placeholder energy predictor."""
 
-    placeholder_energies = {
-        "O": -108.0,
-        "O2": -112.0,
-        "N2O": -120.0,
-    }
+def load_uma_calculator():
+    """Load UMA calculator."""
 
-    return placeholder_energies.get(
-        adsorbate,
-        None,
+    from fairchem.core import (
+        pretrained_mlip,
+        FAIRChemCalculator,
     )
+
+    predictor = (
+        pretrained_mlip.get_predict_unit(
+            "uma-s-1p2",
+            device="cpu",
+        )
+    )
+
+    calculator = FAIRChemCalculator(
+        predictor,
+        task_name="oc22",
+    )
+
+    return calculator
+
+
+def compute_energy(
+    structure_file: str,
+    calculator,
+):
+    """Compute UMA energy."""
+
+    structure = Structure.from_file(
+        structure_file
+    )
+
+    atoms = (
+        AseAtomsAdaptor.get_atoms(
+            structure
+        )
+    )
+
+    atoms.calc = calculator
+
+    energy = (
+        atoms.get_potential_energy()
+    )
+
+    return energy
 
 
 def main():
@@ -62,6 +96,7 @@ def main():
     )
 
     if output_path.exists():
+
         existing = pd.read_csv(
             output_path
         )
@@ -73,7 +108,9 @@ def main():
         )
 
     else:
+
         existing = pd.DataFrame()
+
         completed_files = set()
 
     subset = metadata.iloc[
@@ -81,7 +118,22 @@ def main():
     ]
 
     if args.limit is not None:
-        subset = subset.iloc[:args.limit]
+
+        subset = subset.iloc[
+            :args.limit
+        ]
+
+    print(
+        "Loading UMA model..."
+    )
+
+    calculator = (
+        load_uma_calculator()
+    )
+
+    print(
+        "UMA model loaded."
+    )
 
     results = []
 
@@ -96,7 +148,10 @@ def main():
             "adsorbate_structure_file"
         ]
 
-        if structure_file in completed_files:
+        if (
+            structure_file
+            in completed_files
+        ):
 
             print(
                 f"[SKIP] "
@@ -105,60 +160,84 @@ def main():
 
             continue
 
-        adsorbate = row["adsorbate"]
-
         print(
             f"[{idx}/{total}] "
             f"Processing "
             f"{structure_file}"
         )
 
-        predicted_energy = (
-            placeholder_predict_energy(
-                adsorbate
+        try:
+
+            energy = compute_energy(
+                structure_file,
+                calculator,
             )
-        )
+
+            status = "success"
+
+            print(
+                f"Energy: "
+                f"{energy:.6f} eV"
+            )
+
+        except Exception as error:
+
+            energy = None
+
+            status = (
+                f"failed: {error}"
+            )
+
+            print(
+                f"FAILED: {error}"
+            )
 
         results.append(
             {
                 "material_id":
                     row["material_id"],
                 "nominal_formula":
-                    row["nominal_formula"],
+                    row[
+                        "nominal_formula"
+                    ],
                 "adsorbate":
-                    adsorbate,
+                    row["adsorbate"],
                 "adsorbate_structure_file":
                     structure_file,
                 "predicted_energy_eV":
-                    predicted_energy,
+                    energy,
                 "backend":
-                    "placeholder_batch",
+                    "uma-s-1p2",
+                "status":
+                    status,
             }
         )
 
-    new_results = pd.DataFrame(
-        results
-    )
-
-    if not existing.empty:
-        final = pd.concat(
-            [
-                existing,
-                new_results,
-            ],
-            ignore_index=True,
+        temp_df = pd.DataFrame(
+            results
         )
 
-    else:
-        final = new_results
+        if not existing.empty:
 
-    final.to_csv(
-        output_path,
-        index=False,
-    )
+            combined = pd.concat(
+                [
+                    existing,
+                    temp_df,
+                ],
+                ignore_index=True,
+            )
+
+        else:
+
+            combined = temp_df
+
+        combined.to_csv(
+            output_path,
+            index=False,
+        )
 
     print(
-        "Batch energy prediction completed"
+        "Batch UMA prediction completed"
     )
 
     print(
