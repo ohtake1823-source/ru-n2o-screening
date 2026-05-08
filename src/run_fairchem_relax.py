@@ -11,6 +11,26 @@ def is_fairchem_available() -> bool:
         return False
 
 
+def predict_energy_with_fairchem_placeholder_interface(
+    structure_file: str,
+    adsorbate: str,
+):
+    """
+    Placeholder interface for future fairchem/Open Catalyst energy prediction.
+
+    This function currently returns placeholder energies even when fairchem is
+    installed. Later, this is where the real fairchem calculator will be called.
+    """
+
+    placeholder_energies = {
+        "O": -108.0,
+        "O2": -112.0,
+        "N2O": -120.0,
+    }
+
+    return placeholder_energies.get(adsorbate, None)
+
+
 def main():
     metadata_path = Path("data/adsorbates/adsorbate_metadata.csv")
     output_dir = Path("data/results")
@@ -22,34 +42,41 @@ def main():
 
     fairchem_available = is_fairchem_available()
 
-    if not fairchem_available:
+    if fairchem_available:
+        print("fairchem is installed.")
+        print("Using placeholder fairchem interface for now.")
+    else:
         print("fairchem is not installed.")
         print("Writing placeholder energies instead.")
-
-    placeholder_energies = {
-        "O": -108.0,
-        "O2": -112.0,
-        "N2O": -120.0,
-    }
 
     results = []
 
     for _, row in adsorbate_metadata.iterrows():
         adsorbate = row["adsorbate"]
+        structure_file = row["file"]
+
+        predicted_energy = (
+            predict_energy_with_fairchem_placeholder_interface(
+                structure_file=structure_file,
+                adsorbate=adsorbate,
+            )
+        )
 
         results.append(
             {
-                "structure_file": row["file"],
+                "structure_file": structure_file,
                 "adsorbate": adsorbate,
-                "predicted_energy_eV": placeholder_energies.get(
-                    adsorbate, None
+                "predicted_energy_eV": predicted_energy,
+                "backend": (
+                    "fairchem_placeholder_interface"
+                    if fairchem_available
+                    else "placeholder"
                 ),
-                "backend": "placeholder"
-                if not fairchem_available
-                else "fairchem",
-                "status": "placeholder"
-                if not fairchem_available
-                else "not_implemented",
+                "status": (
+                    "fairchem_installed_placeholder_used"
+                    if fairchem_available
+                    else "placeholder_no_fairchem"
+                ),
             }
         )
 
