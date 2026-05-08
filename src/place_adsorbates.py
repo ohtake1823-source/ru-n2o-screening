@@ -25,6 +25,16 @@ def create_o2_adsorbate():
         ],
     )
 
+def create_n2o_adsorbate():
+    """Create N2O molecular adsorbate."""
+    return Molecule(
+        ["N", "N", "O"],
+        [
+            [0, 0, 0],
+            [0, 0, 1.13],
+            [0, 0, 2.32],
+        ],
+    )
 
 def main():
     slab_path = "data/slabs/RuO2_110_slab.cif"
@@ -35,13 +45,14 @@ def main():
 
     o_ads = create_o_adsorbate()
     o2_ads = create_o2_adsorbate()
+    n2o_ads = create_n2o_adsorbate()
 
     output_dir = Path("data/adsorbates")
     output_dir.mkdir(parents=True, exist_ok=True)
 
     o_structures = asf.generate_adsorption_structures(o_ads)
     o2_structures = asf.generate_adsorption_structures(o2_ads)
-
+    n2o_structures = asf.generate_adsorption_structures(n2o_ads)
     metadata = []
 
     if len(o_structures) > 0:
@@ -65,6 +76,18 @@ def main():
                 "adsorbate": "O2",
                 "file": str(o2_file),
                 "num_sites": len(o2_structures[0]),
+            }
+        )
+
+    if len(n2o_structures) > 0:
+        n2o_file = output_dir / "RuO2_110_N2O.cif"
+        n2o_structures[0].to(filename=str(n2o_file))
+
+        metadata.append(
+            {
+                "adsorbate": "N2O",
+                "file": str(n2o_file),
+                "num_sites": len(n2o_structures[0]),
             }
         )
 
