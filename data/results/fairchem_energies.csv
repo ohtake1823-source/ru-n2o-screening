@@ -1,0 +1,4 @@
+structure_file,adsorbate,predicted_energy_eV,backend,status
+data\adsorbates\RuO2_110_O.cif,O,-108.0,placeholder,placeholder
+data\adsorbates\RuO2_110_O2.cif,O2,-112.0,placeholder,placeholder
+data\adsorbates\RuO2_110_N2O.cif,N2O,-120.0,placeholder,placeholder
