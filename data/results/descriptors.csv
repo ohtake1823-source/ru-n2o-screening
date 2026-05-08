@@ -1,0 +1,4 @@
+adsorbate,adsorption_energy_eV,structure_file
+O,-3.0,data\adsorbates\RuO2_110_O.cif
+O2,-2.0,data\adsorbates\RuO2_110_O2.cif
+N2O,-5.0,data\adsorbates\RuO2_110_N2O.cif
