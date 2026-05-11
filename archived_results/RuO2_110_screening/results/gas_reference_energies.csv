@@ -1,0 +1,3 @@
+molecule,predicted_energy_eV,backend,status
+O2,-9.903653057601012,uma-s-1p2,success
+N2O,-21.094696648665213,uma-s-1p2,success

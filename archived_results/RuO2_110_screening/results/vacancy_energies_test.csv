@@ -1,0 +1,4 @@
+material_id,M_element,Ru_fraction,M_fraction,nominal_formula,vacancy_site_index,vacancy_structure_file,predicted_energy_eV,backend,status
+MAT_001,Li,1.0,0.0,RuO2,0,data\vacancies\MAT_001_vacancy_site0.cif,-163.98538197260933,uma-s-1p2,success
+MAT_001,Li,1.0,0.0,RuO2,1,data\vacancies\MAT_001_vacancy_site1.cif,-164.67400890548328,uma-s-1p2,success
+MAT_001,Li,1.0,0.0,RuO2,2,data\vacancies\MAT_001_vacancy_site2.cif,-163.98538569711732,uma-s-1p2,success

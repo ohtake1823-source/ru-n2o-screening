@@ -25,6 +25,7 @@ def create_o2_adsorbate():
         ],
     )
 
+
 def create_n2o_adsorbate():
     """Create N2O molecular adsorbate."""
     return Molecule(
@@ -36,63 +37,42 @@ def create_n2o_adsorbate():
         ],
     )
 
+
 def main():
     slab_path = "data/slabs/RuO2_110_slab.cif"
 
     slab = load_slab(slab_path)
-
     asf = AdsorbateSiteFinder(slab)
 
-    o_ads = create_o_adsorbate()
-    o2_ads = create_o2_adsorbate()
-    n2o_ads = create_n2o_adsorbate()
+    adsorbates = {
+        "O": create_o_adsorbate(),
+        "O2": create_o2_adsorbate(),
+        "N2O": create_n2o_adsorbate(),
+    }
 
     output_dir = Path("data/adsorbates")
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    o_structures = asf.generate_adsorption_structures(o_ads)
-    o2_structures = asf.generate_adsorption_structures(o2_ads)
-    n2o_structures = asf.generate_adsorption_structures(n2o_ads)
     metadata = []
 
-    if len(o_structures) > 0:
-        o_file = output_dir / "RuO2_110_O.cif"
-        o_structures[0].to(filename=str(o_file))
+    for name, molecule in adsorbates.items():
+        structures = asf.generate_adsorption_structures(molecule)
+
+        if len(structures) == 0:
+            continue
+
+        file_path = output_dir / f"RuO2_110_{name}.cif"
+        structures[0].to(filename=str(file_path))
 
         metadata.append(
             {
-                "adsorbate": "O",
-                "file": str(o_file),
-                "num_sites": len(o_structures[0]),
-            }
-        )
-
-    if len(o2_structures) > 0:
-        o2_file = output_dir / "RuO2_110_O2.cif"
-        o2_structures[0].to(filename=str(o2_file))
-
-        metadata.append(
-            {
-                "adsorbate": "O2",
-                "file": str(o2_file),
-                "num_sites": len(o2_structures[0]),
-            }
-        )
-
-    if len(n2o_structures) > 0:
-        n2o_file = output_dir / "RuO2_110_N2O.cif"
-        n2o_structures[0].to(filename=str(n2o_file))
-
-        metadata.append(
-            {
-                "adsorbate": "N2O",
-                "file": str(n2o_file),
-                "num_sites": len(n2o_structures[0]),
+                "adsorbate": name,
+                "file": str(file_path),
+                "num_sites": len(structures[0]),
             }
         )
 
     metadata_df = pd.DataFrame(metadata)
-
     metadata_path = output_dir / "adsorbate_metadata.csv"
     metadata_df.to_csv(metadata_path, index=False)
 

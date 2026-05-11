@@ -1,0 +1,4 @@
+material_id,M_element,Ru_fraction,M_fraction,nominal_formula,adsorption_site_index,h2o_structure_file,predicted_energy_eV,backend,status
+MAT_001,Li,1.0,0.0,RuO2,0,data\h2o_adsorbates\MAT_001_H2O_site0.cif,-359.8722870143849,uma-s-1p2,success
+MAT_001,Li,1.0,0.0,RuO2,1,data\h2o_adsorbates\MAT_001_H2O_site1.cif,-359.32322430818294,uma-s-1p2,success
+MAT_001,Li,1.0,0.0,RuO2,2,data\h2o_adsorbates\MAT_001_H2O_site2.cif,-358.0907815135217,uma-s-1p2,success

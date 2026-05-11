@@ -5,6 +5,9 @@ from pymatgen.core import Structure, Molecule
 from pymatgen.analysis.adsorption import AdsorbateSiteFinder
 
 
+MAX_SITES_PER_ADSORBATE = 3
+
+
 def create_adsorbate(name: str) -> Molecule:
     if name == "O":
         return Molecule(["O"], [[0, 0, 0]])
@@ -40,39 +43,40 @@ def main():
             adsorbate = create_adsorbate(adsorbate_name)
             structures = asf.generate_adsorption_structures(adsorbate)
 
-            if len(structures) == 0:
-                continue
+            for site_index, structure in enumerate(
+                structures[:MAX_SITES_PER_ADSORBATE]
+            ):
+                file_name = (
+                    f"{row['material_id']}_"
+                    f"{adsorbate_name}_"
+                    f"site{site_index}_adsorbed.cif"
+                )
 
-            file_name = (
-                f"{row['material_id']}_"
-                f"{adsorbate_name}_adsorbed.cif"
-            )
-            file_path = output_dir / file_name
+                file_path = output_dir / file_name
+                structure.to(filename=str(file_path))
 
-            structures[0].to(filename=str(file_path))
-
-            metadata.append(
-                {
-                    "material_id": row["material_id"],
-                    "M_element": row["M_element"],
-                    "Ru_fraction": row["Ru_fraction"],
-                    "M_fraction": row["M_fraction"],
-                    "nominal_formula": row["nominal_formula"],
-                    "adsorbate": adsorbate_name,
-                    "adsorbate_structure_file": str(file_path),
-                    "parent_slab_file": row["slab_file"],
-                    "notes": "first generated adsorption structure",
-                }
-            )
+                metadata.append(
+                    {
+                        "material_id": row["material_id"],
+                        "M_element": row["M_element"],
+                        "Ru_fraction": row["Ru_fraction"],
+                        "M_fraction": row["M_fraction"],
+                        "nominal_formula": row["nominal_formula"],
+                        "adsorbate": adsorbate_name,
+                        "adsorption_site_index": site_index,
+                        "adsorbate_structure_file": str(file_path),
+                        "parent_slab_file": row["slab_file"],
+                        "notes": "multiple adsorption site structure",
+                    }
+                )
 
     metadata_df = pd.DataFrame(metadata)
 
-    metadata_path = (
-        output_dir / "substituted_adsorbate_metadata.csv"
-    )
+    metadata_path = output_dir / "substituted_adsorbate_metadata.csv"
     metadata_df.to_csv(metadata_path, index=False)
 
     print("Adsorbates placed on substituted slabs")
+    print(f"Number of generated structures: {len(metadata_df)}")
     print(f"Saved metadata: {metadata_path}")
 
 
